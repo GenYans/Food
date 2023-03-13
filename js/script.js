@@ -240,10 +240,8 @@ const deadLine = '2023-03-20T16:16:00';
             `;
             form.insertAdjacentElement('afterend', statusMessage);/* Позволяет помещять элемент в разные места верстки */
 
-            const request = new XMLHttpRequest();
-            request.open('POST', 'server.php');
 
-            request.setRequestHeader('Content-type', 'application/json');
+            /* request.setRequestHeader('Content-type', 'application/json'); */
             const formData = new FormData(form);
 
             const object = {};
@@ -251,10 +249,26 @@ const deadLine = '2023-03-20T16:16:00';
                 object[key] = value;
             });
 
-            const json = JSON.stringify(object);
-            request.send(json);
+            fetch('server.php', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify(object)
+            })
+            .then(data => data.text())
+            .then(data => {
+                console.log(data);
+                showThanksModal(message.success);
+                form.reset();
+                statusMessage.remove();
+            }).catch(() => {
+                showThanksModal(message.failure);
+            }).finally(() => {
+                form.reset();
+            }); 
 
-            request.addEventListener('load', () => {
+/*             request.addEventListener('load', () => {
                 if(request.status === 200) {
                     console.log(request.response);
                     showThanksModal(message.success);
@@ -263,7 +277,7 @@ const deadLine = '2023-03-20T16:16:00';
                 } else {
                     showThanksModal(message.failure);
                 }
-            });  
+            });   */
         });
     }
 
