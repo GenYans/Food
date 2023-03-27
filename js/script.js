@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /* Timer */
 
-const deadLine = '2023-03-20T16:16:00';
+const deadLine = '2023-06-20T16:16:00';
 
     function getTimeRemaining(endtime) {
         let days,hours,minutes,seconds;
@@ -378,5 +378,5 @@ const deadLine = '2023-03-20T16:16:00';
 
 fetch('http://localhost:3000/menu')
     .then(data => data.json)
-    .then(res => console.log(res));
+    /* .then(res => console.log(res)); */
 });
