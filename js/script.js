@@ -3,6 +3,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const tabs = document.querySelectorAll('.tabheader__item'),
               tabsContant = document.querySelectorAll('.tabcontent'),
               tabsParent = document.querySelector('.tabheader__items');
+
  
     function hideTabContent() { /* Скрывает табы */
         tabsContant.forEach(item => {
@@ -35,6 +36,55 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    });
+
+// Slider 
+
+    const slides = document.querySelectorAll('.offer__slide'),
+        slidePrev = document.querySelector('.offer__slider-prev'),
+        slideNext = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current');
+    let slideIndex = 1;
+
+    showSlides(slideIndex);
+
+    if (slides.length < 10) { // Изменение количества слайдов
+        total.textContent  = `0${slides.length}`;
+    } else {
+        total.textContent = slides.length;
+    }
+
+    function showSlides(n) {
+        if (n > slides.length) { // Если мы перешли в крайнюю границу, т.е в 4 слайд, то мы перемещаемся назад на 1 слайд
+            slideIndex = 1;
+        }
+
+        if (n < 1) { // Если мы переходим с 1 в 4 слайд
+            slideIndex = slides.length;
+        }
+
+        slides.forEach(item => item.style.display = 'none'); // Скрываем слайды
+
+        slides[slideIndex - 1].style.display = 'block'; // Показывает нужный слайд
+
+        if (slides.length < 10) { // Изменение счетчика
+            current.textContent  = `0${slideIndex}`;
+        } else {
+            total.textContent = slideIndex;
+        }
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);//Взаимодействие цифр с слайдами
+    }
+
+    slidePrev.addEventListener('click', () => {
+        plusSlides(-1);
+    });
+
+    slideNext.addEventListener('click', () => {
+        plusSlides(1);
     });
 
 /* Timer */
