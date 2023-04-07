@@ -1,22 +1,6 @@
 {
-  "name": "food",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GenYans/Food.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GenYans/Food/issues"
-  },
-  "homepage": "https://github.com/GenYans/Food#readme",
   "devDependencies": {
-    "json-server": "^0.17.2"
+    "webpack": "^5.78.0",
+    "webpack-cli": "^5.0.1"
   }
 }
