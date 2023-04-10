@@ -1,14 +1,14 @@
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter,currentCounter, wrapper, field}) {
 // Slider 
 
-    const slides = document.querySelectorAll('.offer__slide'),
-    slider = document.querySelector('.offer__slider'),
-    slidePrev = document.querySelector('.offer__slider-prev'),
-    slideNext = document.querySelector('.offer__slider-next'),
-    total = document.querySelector('#total'),
-    current = document.querySelector('#current'),
-    slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-    slidesField = document.querySelector('.offer__slider-inner'),
+    const slides = document.querySelectorAll(slide),
+    slider = document.querySelector(container),
+    slidePrev = document.querySelector(prevArrow),
+    slideNext = document.querySelector(nextArrow),
+    total = document.querySelector(totalCounter),
+    current = document.querySelector(currentCounter),
+    slidesWrapper = document.querySelector(wrapper),
+    slidesField = document.querySelector(field),
     width = window.getComputedStyle(slidesWrapper).width; //Получить элемент со страницы
 
     let slideIndex = 1;
@@ -41,8 +41,8 @@ function slider() {
 
     slider.style.position = 'relative';
 
-    const indicators = document.createElement('ol');
-    dots = [];
+    const indicators = document.createElement('ol'),
+          dots = [];
 
     indicators.classList.add('carousel-indicators');
     indicators.style.cssText = `
@@ -197,4 +197,4 @@ function slider() {
     plusSlides(1);
     }); */
 }
-module.exports = slider;
+export default slider;

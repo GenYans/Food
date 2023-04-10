@@ -1,45 +1,49 @@
-    function modal() {
-    /* Modal */
+    function openModal(modalSelector, modalTimerID) {
+        const modalOpen = document.querySelector(modalSelector);
 
-    const call = document.querySelectorAll('[data-modal]'),
-    modalOpen = document.querySelector('.modal');
-
-    function openModal() {
         modalOpen.classList.add('show');
         modalOpen.classList.remove('hide');
         document.body.style.overflow = 'hidden';
-        clearInterval(modalTimerID);
+
+        console.log(modalTimerID);
+        if(modalTimerID) {
+            clearInterval(modalTimerID);
+        }
     }
+    function closeModal(modalSelector) {
+        const modalOpen = document.querySelector(modalSelector);
 
-    call.forEach(btn => {
-        btn.addEventListener('click',openModal);
-    });
-
-
-
-    function closeModal() {
         modalOpen.classList.toggle('show');
         document.body.style.overflow = '';
     }
     
+    function modal(triggerSelector, modalSelector, modalTimerID) {
+    /* Modal */
+
+    const call = document.querySelectorAll(triggerSelector),
+    modalOpen = document.querySelector(modalSelector);
+
+    call.forEach(btn => {
+        btn.addEventListener('click',() => openModal(modalSelector,modalTimerID));
+    });
+
+    
 
     modalOpen.addEventListener('click', (e) => {
         if (e.target === modalOpen || e.target.getAttribute('data-close')=== '') {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && modalOpen.classList.contains('show')) {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
 
-    const modalTimerID = setTimeout(openModal, 50000);
-
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight -1) {
-            openModal();
+            openModal(modalSelector, modalTimerID);
             window.removeEventListener('scroll', showModalByScroll);
         }
     }
@@ -48,4 +52,6 @@
     /* Классы для карточек */
 }
 
-module.exports = modal;
+export default modal;
+export {closeModal};
+export {openModal};
